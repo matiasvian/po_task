@@ -19,6 +19,8 @@ class PO_APP {
         StreamWriter writer = new StreamWriter("data/po-kunder-brr.csv");
         writer.WriteLine("organisasjonsnummer;navn;naeringskode1;organisasjonsform;antallAnsatte;po_navn");
 
+        Console.WriteLine(ClientList.Count);
+
         for (int i = 1; i < ClientList.Count; i++) {
 
             var client = ClientList[i];
@@ -43,7 +45,7 @@ class PO_APP {
         var statistics = Statistics.GetStatistics("data/po-kunder-brr.csv");
 
         foreach (var stat in statistics) {
-            Console.WriteLine(stat.Key + ": " + stat.Value);
+            Console.WriteLine(stat.Key + ": " + stat.Value + " (" + Math.Round((double)stat.Value / ClientList.Count * 100, 2) + "%)");
         }
         
         Log.Information("Done.");
